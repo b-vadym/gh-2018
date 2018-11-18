@@ -19,10 +19,10 @@ class PostController extends AbstractController
 
     /**
      * @param int $id
-     * @return JsonResponse
      * @throws NotFoundHttpException
+     * @return JsonResponse
      */
-    public function show(int $id)
+    public function show(int $id): Response
     {
         $post = $this->find($id);
 
@@ -30,14 +30,35 @@ class PostController extends AbstractController
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
-
         return new JsonResponse($post);
     }
 
-    public function delete(int $id)
+    /**
+     * @param int $id
+     * @return Response
+     */
+    public function delete(int $id): Response
     {
 //        delete
         return $this->redirectToRoute('post_list');
+    }
+
+    /**
+     * @return Response
+     */
+    public function notMatched(): Response
+    {
+        return new Response('worked');
+    }
+
+    /**
+     * @param \DateTime $start
+     * @param \DateTime $end
+     * @return Response
+     */
+    public function archive(\DateTime $start, \DateTime $end): Response
+    {
+        return new Response('ok');
     }
 
     /**
