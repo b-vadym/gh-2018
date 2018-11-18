@@ -1,0 +1,20 @@
+post_list:
+  path: /
+  methods: ['GET']
+  controller: App\Controller\PostController::list
+
+post_show:
+  path: /{id}
+  controller: App\Controller\PostController::show
+  methods: ['GET']
+  requirements:
+    id: '\d+'
+    _format: json
+
+post_delete:
+  path: /{id}
+  controller: App\Controller\PostController::delete
+  methods: ['POST']
+  requirements:
+    id: '\d+'
+    _format: json

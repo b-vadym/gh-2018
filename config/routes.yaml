@@ -1,3 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+post:
+    resource: 'routes/post.yml'
+    prefix: 'post/'
