@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <ul>
+        <li><a href="{{ path('post_list') }}">Post list</a></li>
+    </ul>
+    <h1>{{ post.title|title }}</h1>
+    <p>Published At: {{ post.publishedAt|date }}</p>
+    <div class="post-body">{{ post.body }}</div>
+    <div>
+        <h4>Comments</h4>
+        {% for comment in post.comments %}
+            {% include 'post/comment.html.twig'  with {'comment': comment} only %}
+        {% else %}
+            no comments found
+        {% endfor %}
+    </div>
+{% endblock %}

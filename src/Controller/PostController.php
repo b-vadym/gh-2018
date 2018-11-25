@@ -3,24 +3,58 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends AbstractController
 {
     /**
+     * @var array
+     */
+    private $posts;
+
+    public function __construct()
+    {
+        $this->posts = [
+            [
+                'id' => 1,
+                'title' => 'title1',
+                'body' => '<p>body1</p>',
+                'publishedAt' => new \DateTime('-7days'),
+                'comments' => [
+                    [
+                        'id' => 1,
+                        'body' => 'body',
+                    ], [
+                        'id' => 2,
+                        'body' => 'body2',
+                    ],
+                ],
+            ],
+            [
+                'id' => 2,
+                'title' => 'title2',
+                'body' => '<p>body2</p>',
+                'publishedAt' => new \DateTime('-7days'),
+                'comments' => [],
+            ],
+        ];
+    }
+
+    /**
      * @return Response
      */
     public function list(): Response
     {
-        return new Response('<html><body>foo</body></html>');
+        return $this->render('post/list.html.twig', [
+            'posts' => $this->posts,
+        ]);
     }
 
     /**
      * @param int $id
      * @throws NotFoundHttpException
-     * @return JsonResponse
+     * @return Response
      */
     public function show(int $id): Response
     {
@@ -30,7 +64,9 @@ class PostController extends AbstractController
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
-        return new JsonResponse($post);
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -67,12 +103,7 @@ class PostController extends AbstractController
      */
     private function find(int $id): ?array
     {
-        $posts = [
-            ['id' => 1, 'title' => 'title1', 'body' => 'body1'],
-            ['id' => 2, 'title' => 'title2', 'body' => 'body2'],
-        ];
-
-        foreach ($posts as $post) {
+        foreach ($this->posts as $post) {
             if ($post['id'] === $id) {
                 return $post;
             }

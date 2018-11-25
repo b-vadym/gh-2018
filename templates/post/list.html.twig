@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+        {% for post in posts %}
+            <div class="col">
+                <h3>{{ post.title }}</h3>
+                <div class="post-content">{{ post.body }}</div>
+            </div>
+        {% else %}
+            <p>--------------------</p>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
