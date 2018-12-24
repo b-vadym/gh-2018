@@ -8,6 +8,14 @@
         {% endblock %}
     </head>
     <body>
+        <div>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <p>hello: {{ app.user.email }}</p>
+                <a href="{{ path('app_logout') }}">logouth</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">login</a>
+            {% endif %}
+        </div>
         <div class="container-fluid">
             {% block body %}{% endblock %}
         </div>

@@ -1,3 +1,11 @@
 post:
     resource: 'routes/post.yml'
-    prefix: 'post/'
+#    prefix: 'post/'
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login

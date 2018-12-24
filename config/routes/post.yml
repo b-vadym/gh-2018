@@ -11,21 +11,6 @@ post_show:
     id: '\d+'
     _format: json
 
-not_matched_route:
-  path: /test
-  controller: App\Controller\PostController::notMatched
-  methods: ['GET']
-  requirements:
-    id: '\d+'
-    _format: json
-
-post_delete:
-  path: /{id}
-  controller: App\Controller\PostController::delete
-  methods: ['POST']
-  requirements:
-    id: '\d+'
-    _format: json
-
-post_date:
-  path: post/{start}/{end}
+post_edit:
+  path: /edit/{id}
+  controller: App\Controller\PostController::edit
